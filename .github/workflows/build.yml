@@ -157,7 +157,7 @@ jobs:
           echo "     \"package\":\"com.32blit." >> "./output/${{matrix.output}}/config.json"
           echo "${{matrix.output}}" | sed -r 's/[- ]+/./g' >> "./output/${{matrix.output}}/config.json"
           echo "\","  >> "./output/${{matrix.output}}/config.json"
-          echo "     \"label\":\"${{matrix.output}}"," >> "./output/${{matrix.output}}/config.json"
+          echo "     \"label\":\"${{matrix.output}}\"," >> "./output/${{matrix.output}}/config.json"
           echo "     \"icon\":\"icon.png\"," >> "./output/${{matrix.output}}/config.json"
           echo "     \"launch\":\"launch.sh\"," >> "./output/${{matrix.output}}/config.json"
           echo "     \"description\":\"${{matrix.output}} 32Blit SDK Game\"" >> "./output/${{matrix.output}}/config.json"
