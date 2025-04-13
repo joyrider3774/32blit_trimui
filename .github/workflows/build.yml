@@ -54,8 +54,8 @@ jobs:
           - { repo: 'deckerego/picosystem-demo',                      output: 'match3',             dir: ''}
           
           - { repo: 'andreban/32blit-a-maze',                         output: 'amaze',              dir: ''}
-          
-          - { repo: 'felipemanga/Armadillo32Blit',                    output: 'armadillo',          dir: ''}
+          # build fails with trimui sdk
+          # - { repo: 'felipemanga/Armadillo32Blit',                    output: 'armadillo',          dir: ''}
           
 
         # these will contain bins for all the games in the repo as subdir building did not work so be it  
