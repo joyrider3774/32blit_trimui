@@ -1,0 +1,223 @@
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually ftarget the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: ${{ matrix.output }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { repo: 'ThePythonator/Super-Square-Bros',                output: 'Super-Square-Bros',  dir: ''} 
+          - { repo: 'ThePythonator/Jumpy-Squirrel',                   output: 'Jumpy-Squirrel',     dir: ''}
+          - { repo: 'ThePythonator/Ping',                             output: 'Ping',               dir: ''}
+          
+          - { repo: 'ahnlak-blit32/32blox',                           output: '32blox',             dir: ''} 
+          - { repo: 'ahnlak-blit32/sokoblit',                         output: 'sokoblit',           dir: ''}
+          
+          - { repo: 'lummi01/32Blit-4_in_a_row',                      output: '4inrow',             dir: ''}
+          - { repo: 'lummi01/32Blit-AlienAttack',                     output: 'alienattack',        dir: ''}
+          - { repo: 'lummi01/32Blit-Asteroids',                       output: 'asteroids',          dir: ''}
+          - { repo: 'lummi01/32Blit-Cannonhead',                      output: 'cannonhead',         dir: ''}
+          - { repo: 'lummi01/32Blit-Invader',                         output: 'invader',            dir: ''}
+          - { repo: 'lummi01/32Blit-Pitfall-Harry',                   output: 'harry',              dir: ''}
+          - { repo: 'lummi01/32Blit-SnakeRace',                       output: 'snake2',             dir: ''}
+          - { repo: 'lummi01/32Blit-Save-the-Castle',                 output: 'castle',             dir: ''}
+          - { repo: 'lummi01/32Blit-Indy500',                         output: 'indy',               dir: ''}
+          - { repo: 'lummi01/32Blit-MissileCommand',                  output: 'missile',            dir: ''}
+          - { repo: 'lummi01/32Blit-Dodgeem',                         output: 'dodgeem',            dir: ''}
+          - { repo: 'lummi01/32Blit-Tower',                           output: 'tower',              dir: ''}
+          - { repo: 'lummi01/32Blit-game-of-life',                    output: 'gol',                dir: ''}
+          - { repo: 'lummi01/32Blit-Dino',                            output: 'dino',               dir: ''}
+          - { repo: 'lummi01/32Blit-Bounce',                          output: 'bounce',             dir: ''}
+          - { repo: 'lummi01/32Blit-SimonSays',                       output: 'simon',              dir: ''}
+          - { repo: 'lummi01/32Blit-Snake',                           output: 'Snake',              dir: ''}
+
+          - { repo: 'shane-powell/blit-racers',                       output: 'blit-racers',        dir: ''}
+        
+          - { repo: 'Daft-Freak/fourblock-descent',                   output: 'fourblock-descent',  dir: ''}
+          - { repo: 'Daft-Freak/super-blit-kart',                     output: 'blit-kart',          dir: ''}
+  
+          - { repo: '32blit/rocks-and-diamonds',                      output: 'rocks-and-diamonds', dir: ''}
+          
+          - { repo: 'ArtemHarkusha/32blit-minesweeper',               output: 'minesweeper',        dir: ''}
+          - { repo: 'ArtemHarkusha/32blit-2048',                      output: '2048',               dir: ''}
+          
+          - { repo: 'ThatOtherOtherBob/Solitaire',                    output: 'Solitaire',          dir: ''}
+          
+          - { repo: 'Gadgetoid/32blit-dots',                          output: 'dots',               dir: ''}
+          
+          - { repo: 'Blackhawk-TA/TowerDefense',                      output: 'TowerDefense',       dir: ''}
+          
+          - { repo: 'deckerego/picosystem-demo',                      output: 'match3',             dir: ''}
+          
+          - { repo: 'andreban/32blit-a-maze',                         output: 'amaze',              dir: ''}
+          
+          - { repo: 'felipemanga/Armadillo32Blit',                    output: 'armadillo',          dir: ''}
+          
+
+        # these will contain bins for all the games in the repo as subdir building did not work so be it  
+          - { repo: 'mikerr/32blit-games',                            output: 'carsprint',          dir: ''}
+          - { repo: 'mikerr/32blit-games',                            output: 'dune2',              dir: ''}
+        
+          - { repo: 'mikerr/32blit-games',                            output: 'jetpac',             dir: ''}
+          - { repo: 'mikerr/32blit-games',                            output: 'knightlore',         dir: ''}
+          - { repo: 'mikerr/32blit-games',                            output: 'willy',              dir: ''}
+          - { repo: 'mikerr/32blit-games',                            output: 'wakkawakka',         dir: ''}
+                             
+          - { repo: '32blit/32blit-examples',                         output: 'geometry',           dir: ''}   
+          - { repo: '32blit/32blit-examples',                         output: 'raycaster',          dir: ''}
+          - { repo: '32blit/32blit-examples',                         output: 'scrolly-tile',       dir: ''}  
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+               
+      - name: get SDK
+        uses: wei/wget@v1
+        with:
+          args: -O trimui-sdk.tar.gz https://github.com/joyrider3774/sdks/releases/latest/download/trimui-sdk.tar.gz
+
+      - name: setup SDK
+        run: |
+          tar -xzvf ./trimui-sdk.tar.gz
+          sudo mv ./trimui-sdk /opt/
+      
+      - name: Checkout 32Blit sdk
+        uses: actions/checkout@v2
+        with:
+          repository: joyrider3774/32blit-sdk
+          path: 32blit-sdk
+          ref: muos
+                
+      - name: setup 32blit extras
+        run: |
+          cd ${{runner.workspace}}
+          python3 -m venv 32blit
+          source ${{runner.workspace}}/32blit/bin/activate
+          python3 -m pip install setuptools
+          python3 -m pip install 32blit 
+          
+      - name: Checkout game sources sources
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+          repository: ${{matrix.repo}}
+          path: tmp
+     
+      - name: Create 32blit Build Environment
+        run: cmake -E make_directory ${{runner.workspace}}/tmp/${{matrix.dir}}/build
+        
+      - name: Configure CMake 32blit
+        working-directory: ${{runner.workspace}}/tmp/${{matrix.dir}}/build
+        run: |
+          source ${{runner.workspace}}/32blit/bin/activate 
+          cmake $GITHUB_WORKSPACE/tmp/${{matrix.dir}} -DCMAKE_BUILD_TYPE=Release -DCPACK_PACKAGE_FILE_NAME=${{ matrix.output}} -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk -DCMAKE_MODULE_PATH=$GITHUB_WORKSPACE/32blit_trimui/trimui_cmake/ -DCMAKE_TOOLCHAIN_FILE=/opt/trimui-sdk/toolchainfile.cmake
+      
+      - name: Build 32blit game
+        working-directory: ${{runner.workspace}}/tmp/${{matrix.dir}}/build
+        shell: bash
+        run: |
+          source ${{runner.workspace}}/32blit/bin/activate
+          cmake --build . --config Release
+          
+      - name: prepare opk directory
+        run: |
+          mkdir output
+          mkdir output/${{matrix.output}}
+          mkdir output/${{matrix.output}}/bin
+          
+           
+      - name: Package for ${{matrix.output}} 32blit game
+        working-directory: ${{runner.workspace}}/tmp/${{matrix.dir}}/build
+        run: |
+          source ${{runner.workspace}}/32blit/bin/activate
+          cmake --build . --config Release --target package
+          
+      - name: Extract Package for ${{matrix.output}} 32blit game
+        run: |
+          cd output/${{matrix.output}}
+          tar -xzvf ${{runner.workspace}}/tmp/${{matrix.dir}}/build/${{ matrix.output }}.tar.gz
+                      
+      - name: create launch.sh 
+        run: |
+          echo "#!/bin/sh" > "./output/launch.sh"
+          echo "echo \$0 \$*" >> "./output/launch.sh"
+          echo "progdir=/mnt/SDCARD/Ports/${{ matrix.output }}" >> "./output/launch.sh"
+          echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$progdir" >> "./output/launch.sh"
+          echo "cd $progdir" >> "./output/launch.sh"
+          echo "HOME=\$progdir ./${{ matrix.output }} -fullscreen" >> "./output/launch.sh"
+          
+      - name: create config.json general stuff
+        run: |
+          echo "{" > "./output/config.json"
+          echo "     \"package\":\"com.32blit." >> "./output/config.json"
+          echo "${{matrix.output}}" | sed -r 's/[- ]+/./g' >> "./output/config.json"
+          echo "\","  >> "./output/config.json"
+          echo "     \"label\":\"${{matrix.output}}"," >> "./output/config.json"
+          echo "     \"icon\":\"icon.png\"," >> "./output/config.json"
+          echo "     \"launch\":\"launch.sh\"," >> "./output/config.json"
+          echo "     \"description\":\"${{matrix.output}} 32Blit SDK Game\"" >> "./output/config.json"
+          echo "}" >> "./output/config.json"
+      
+      - name: setup image magick
+        uses: mfinelli/setup-imagemagick@v6
+      
+      - name: prepape icon in output directory
+        run: |
+          if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/icon.png" ]
+          then
+             magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+          else
+            if [ -f "$GITHUB_WORKSPACE/tmp/icon.png" ]
+            then
+              magick convert "$GITHUB_WORKSPACE/tmp/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+            else
+              if [ -f "$GITHUB_WORKSPACE/tmp/assets/icon.png" ]
+              then
+                magick convert "$GITHUB_WORKSPACE/tmp/assets/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+              else
+                if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/assets/icon.png" ]
+                then
+                  magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/assets/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+                else
+                  if [ -f "$GITHUB_WORKSPACE/tmp/assets/${{matrix.output}}-icon.png" ]
+                  then
+                    magick convert "$GITHUB_WORKSPACE/tmp/assets/${{matrix.output}}-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+                  else
+                    if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/car-icon.png" ]
+                    then
+                      magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/car-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+                    else
+                      if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/${{matrix.output}}-icon.png" ]
+                      then
+                        magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/${{matrix.output}}-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+                      else
+                        if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/rainbow-ascent-icon.png" ]
+                        then
+                          magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/rainbow-ascent-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+                        else
+                          if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/jetman-icon.png" ]
+                          then
+                            magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/jetman-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+                          else
+                            magick convert "$GITHUB_WORKSPACE/32blit_trimui/32blitlogo.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/icon.png
+                          fi
+                        fi
+                      fi
+                    fi
+                  fi
+                fi
+              fi
+            fi
+          fi
+          
+      - name: Store build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.output }} - 32blit - AARCH64 - Trimui 
+          path: output
+          include-hidden-files: true
