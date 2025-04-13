@@ -154,8 +154,7 @@ jobs:
       - name: create config.json general stuff
         run: |
           echo "{" > "./output/${{matrix.output}}/config.json"
-          echo "     \"package\":\"com.32blit.${{matrix.output}}" | sed -r 's/[-]+/./g' >> "./output/${{matrix.output}}/config.json"
-          echo "\","  >> "./output/${{matrix.output}}/config.json"
+          echo "     \"package\":\"com.32blit.${{matrix.output}}\"," | sed -r 's/[-]+/./g' >> "./output/${{matrix.output}}/config.json"
           echo "     \"label\":\"${{matrix.output}}\"," >> "./output/${{matrix.output}}/config.json"
           echo "     \"icon\":\"icon.png\"," >> "./output/${{matrix.output}}/config.json"
           echo "     \"launch\":\"launch.sh\"," >> "./output/${{matrix.output}}/config.json"
