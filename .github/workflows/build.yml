@@ -115,7 +115,7 @@ jobs:
         working-directory: ${{runner.workspace}}/tmp/${{matrix.dir}}/build
         run: |
           source ${{runner.workspace}}/32blit/bin/activate 
-          cmake $GITHUB_WORKSPACE/tmp/${{matrix.dir}} -DCMAKE_BUILD_TYPE=Release -DCPACK_PACKAGE_FILE_NAME=${{ matrix.output}} -D32BLIT_DIR=${{runner.workspace}}/32blit-sdk -DCMAKE_MODULE_PATH=${{runner.workspace}}/32blit_trimui/trimui_cmake/ -DCMAKE_TOOLCHAIN_FILE=/opt/trimui-sdk/toolchainfile.cmake
+          cmake $GITHUB_WORKSPACE/tmp/${{matrix.dir}} -DCMAKE_BUILD_TYPE=Release -DCPACK_PACKAGE_FILE_NAME=${{ matrix.output}} -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk -DCMAKE_MODULE_PATH=${{runner.workspace}}/32blit_trimui/trimui_cmake/ -DCMAKE_TOOLCHAIN_FILE=/opt/trimui-sdk/toolchainfile.cmake
       
       - name: Build 32blit game
         working-directory: ${{runner.workspace}}/tmp/${{matrix.dir}}/build
