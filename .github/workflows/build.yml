@@ -148,7 +148,7 @@ jobs:
           echo "echo \$0 \$*" >> "./output/${{matrix.output}}/launch.sh"
           echo "progdir=/mnt/SDCARD/Ports/${{ matrix.output }}" >> "./output/${{matrix.output}}/launch.sh"
           echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$progdir" >> "./output/${{matrix.output}}/launch.sh"
-          echo "cd $progdir" >> "./output/${{matrix.output}}/launch.sh"
+          echo "cd \$progdir/bin" >> "./output/${{matrix.output}}/launch.sh"
           echo "HOME=\$progdir ./${{ matrix.output }} -fullscreen" >> "./output/${{matrix.output}}/launch.sh"
           
       - name: create config.json general stuff
