@@ -170,41 +170,41 @@ jobs:
         run: |
           if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/icon.png" ]
           then
-             magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+             magick "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
           else
             if [ -f "$GITHUB_WORKSPACE/tmp/icon.png" ]
             then
-              magick convert "$GITHUB_WORKSPACE/tmp/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+              magick "$GITHUB_WORKSPACE/tmp/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
             else
               if [ -f "$GITHUB_WORKSPACE/tmp/assets/icon.png" ]
               then
-                magick convert "$GITHUB_WORKSPACE/tmp/assets/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                magick "$GITHUB_WORKSPACE/tmp/assets/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
               else
                 if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/assets/icon.png" ]
                 then
-                  magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/assets/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                  magick "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/assets/icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
                 else
                   if [ -f "$GITHUB_WORKSPACE/tmp/assets/${{matrix.output}}-icon.png" ]
                   then
-                    magick convert "$GITHUB_WORKSPACE/tmp/assets/${{matrix.output}}-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                    magick "$GITHUB_WORKSPACE/tmp/assets/${{matrix.output}}-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
                   else
                     if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/car-icon.png" ]
                     then
-                      magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/car-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                      magick "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/car-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
                     else
                       if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/${{matrix.output}}-icon.png" ]
                       then
-                        magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/${{matrix.output}}-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                        magick "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/${{matrix.output}}-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
                       else
                         if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/rainbow-ascent-icon.png" ]
                         then
-                          magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/rainbow-ascent-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                          magick "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/rainbow-ascent-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
                         else
                           if [ -f "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/jetman-icon.png" ]
                           then
-                            magick convert "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/jetman-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                            magick "$GITHUB_WORKSPACE/tmp/${{matrix.output}}/jetman-icon.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
                           else
-                            magick convert "$GITHUB_WORKSPACE/32blit_trimui/32blitlogo.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
+                            magick "$GITHUB_WORKSPACE/32blitlogo.png" -interpolate Integer -filter point -resize 170x170 -background transparent -gravity center -extent 300x300-0+40 PNG64:output/${{matrix.output}}/icon.png
                           fi
                         fi
                       fi
