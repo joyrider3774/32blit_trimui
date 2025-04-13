@@ -213,7 +213,7 @@ jobs:
             fi
           fi
       
-      - name: prepape icon in output directory
+      - name: copy SDL2_net library in output directory
         run: |
           cp /opt/trimui-sdk/aarch64-linux-gnu-7.5.0-linaro/usr/lib/libSDL2_net-2.0.so.0 output/${{matrix.output}}
 
