@@ -5,6 +5,10 @@ A collection of [32blit](https://32blit.com/) games running through SDL2 on Trim
 
 Extract the downloaded zip's into the `Ports` folder on your sdcard.
 
+Note: 
+
+- Some Games supporting joystick input (and not only dpad input) seems to have a bit a of a drifting problem on trimui smart pro but they are still playable, games using dpad only don't seem to exhibit this issue
+
 ## match3
 ![match3](screenshot/match3.png)
 
